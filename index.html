@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>No Estimes - Portafolio</title>
+    <style>
+        :root {
+            --bg-light: #fbf1c7;
+            --bg-dark: #282828;
+            --red-light: #cc241d;
+            --red-dark: #fb4934;
+            --green-light: #98971a;
+            --green-dark: #b8bb26;
+            --yellow-light: #d79921;
+            --yellow-dark: #fabd2f;
+            --blue-light: #458588;
+            --blue-dark: #83a598;
+            --purple-light: #b16286;
+            --purple-dark: #d3869b;
+            --aqua-light: #689d6a;
+            --aqua-dark: #8ec07c;
+            --gray-light: #a89984;
+            --gray-dark: #928374;
+            --fg-light: #3c3836;
+            --fg-dark: #ebdbb2;
+            --bg-current: var(--bg-light);
+            --fg-current: var(--fg-light);
+            --accent-current: var(--yellow-light);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-current);
+            color: var(--fg-current);
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid var(--accent-current);
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: var(--fg-current);
+        }
+
+        .portfolio-item {
+            background-color: var(--bg-current);
+            color: var(--fg-current);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            transition: all 0.3s;
+            text-align: left;
+            border: 3px solid var(--accent-current);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            background-color: rgba(214, 93, 14, 0.05);
+        }
+
+        .portfolio-item h2 {
+            margin-top: 0;
+            color: var(--accent-current);
+        }
+
+        .portfolio-item a {
+            color: var(--accent-current);
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid var(--accent-current);
+            padding-bottom: 2px;
+            transition: color 0.3s, border-color 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+
+        .portfolio-item a:hover {
+            color: var(--red-light);
+            border-bottom-color: var(--red-light);
+        }
+
+        .portfolio-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            z-index: 10;
+            width: 30px;
+            height: 30px;
+            padding: 0;
+        }
+
+        .theme-toggle svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--accent-current);
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover svg {
+            transform: scale(1.1);
+        }
+
+        body.dark-mode {
+            --bg-current: var(--bg-dark);
+            --fg-current: var(--fg-dark);
+            --accent-current: var(--yellow-dark);
+        }
+
+        body.dark-mode .portfolio-item:hover {
+            background-color: rgba(250, 189, 47, 0.05);
+        }
+
+        body.dark-mode .portfolio-item a:hover {
+            color: var(--red-dark);
+            border-bottom-color: var(--red-dark);
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="themeToggle">
+        <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12,18c-3.3,0-6-2.7-6-6s2.7-6,6-6c0.1,0,0.2,0,0.3,0c-0.2,0.5-0.3,1-0.3,1.5c0,2.8,2.2,5,5,5c0.5,0,1-0.1,1.5-0.3 C12.2,17.8,12.1,18,12,18z"/>
+        </svg>
+        <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <circle cx="12" cy="12" r="5"/>
+            <line x1="12" y1="1" x2="12" y2="3"/>
+            <line x1="12" y1="21" x2="12" y2="23"/>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+            <line x1="1" y1="12" x2="3" y2="12"/>
+            <line x1="21" y1="12" x2="23" y2="12"/>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+    </button>
+
+    <div class="container">
+        <img src="/assets/noestimes.png" alt="No Estimes" class="profile-img">
+        <h1>No Estimes</h1>
+
+        <div class="portfolio-item" onclick="window.open('https://www.google.com', '_blank')">
+            <h2>Proyecto Ejemplo</h2>
+            <p>Este es un ejemplo de proyecto en mi portafolio. Haz clic en cualquier parte de este recuadro para ir al proyecto (en este ejemplo, Google.com).</p>
+            <a href="https://www.google.com" target="_blank">Ver proyecto</a>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const moonIcon = document.querySelector('.moon-icon');
+        const sunIcon = document.querySelector('.sun-icon');
+
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            
+            if (body.classList.contains('dark-mode')) {
+                localStorage.setItem('theme', 'dark');
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                localStorage.setItem('theme', 'light');
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
+            }
+        });
+
+        document.querySelectorAll('.portfolio-item').forEach(item => {
+            item.querySelector('a').addEventListener('click', e => {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>
