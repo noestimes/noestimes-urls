@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <link rel="icon" href="./assets/noestimes.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>No Estimes - URLs</title>
+    <!-- Favicon circular (versión redonda de la misma imagen) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23fabd2f'/><image href='./assets/noestimes.png' x='5' y='5' width='90' height='90' clip-path='circle(45px at center)'/></svg>">
     <style>
         :root {
             --bg-light: #fbf1c7;
@@ -52,7 +53,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 5px solid var(--accent-current);
-            margin-bottom: 2px; /* Reducido de 20px a 5px */
+            margin-bottom: 5px;
             transition: border-color 0.3s;
         }
 
@@ -65,15 +66,41 @@
         .portfolio-item {
             background-color: var(--bg-current);
             color: var(--fg-current);
-            padding: 20px;
+            padding: 15px;
             margin: 20px 0;
             border-radius: 8px;
             transition: all 0.3s;
-            text-align: left;
             border: 3px solid var(--accent-current);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             position: relative;
+            display: flex;
+            align-items: center;
+            text-align: left;
+        }
+
+        .portfolio-item-content {
+            display: flex;
+            align-items: center;
+            width: 100%;
+        }
+
+        .project-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-right: 15px;
+        }
+
+        .project-text {
+            flex: 1;
+        }
+
+        .project-go {
+            width: 24px;
+            height: 24px;
+            margin-left: 15px;
         }
 
         .portfolio-item:hover {
@@ -83,24 +110,15 @@
         }
 
         .portfolio-item h2 {
-            margin-top: 0;
+            margin: 0 0 5px 0;
             color: var(--accent-current);
+            font-size: 1.2rem;
         }
 
-        .portfolio-item a {
-            color: var(--accent-current);
-            text-decoration: none;
-            font-weight: bold;
-            border-bottom: 2px solid var(--accent-current);
-            padding-bottom: 2px;
-            transition: color 0.3s, border-color 0.3s;
-            position: relative;
-            z-index: 2;
-        }
-
-        .portfolio-item a:hover {
-            color: var(--red-light);
-            border-bottom-color: var(--red-light);
+        .portfolio-item p {
+            margin: 0;
+            color: var(--fg-current);
+            font-size: 0.9rem;
         }
 
         .portfolio-item::after {
@@ -147,11 +165,6 @@
         body.dark-mode .portfolio-item:hover {
             background-color: rgba(250, 189, 47, 0.05);
         }
-
-        body.dark-mode .portfolio-item a:hover {
-            color: var(--red-dark);
-            border-bottom-color: var(--red-dark);
-        }
     </style>
 </head>
 <body>
@@ -177,7 +190,14 @@
         <h1>No Estimes</h1>
 
         <div class="portfolio-item" onclick="window.open('https://www.google.com', '_blank')">
-            <h2>Proyecto Ejemplo</h2>
+            <div class="portfolio-item-content">
+                <img src="./assets/img.png" alt="Icono proyecto" class="project-icon">
+                <div class="project-text">
+                    <h2>Proyecto Ejemplo</h2>
+                    <p>Descripción breve del proyecto</p>
+                </div>
+                <img src="./assets/go.png" alt="Ir al proyecto" class="project-go">
+            </div>
         </div>
     </div>
 
@@ -206,12 +226,6 @@
                 moonIcon.style.display = 'block';
                 sunIcon.style.display = 'none';
             }
-        });
-
-        document.querySelectorAll('.portfolio-item').forEach(item => {
-            item.querySelector('a').addEventListener('click', e => {
-                e.stopPropagation();
-            });
         });
     </script>
 </body>
