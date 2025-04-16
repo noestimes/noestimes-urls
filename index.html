@@ -8,33 +8,39 @@
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='50' fill='%23fabd2f'/><image href='./assets/noestimes.png' x='5' y='5' width='90' height='90' clip-path='circle(45px at center)'/></svg>">
     <style>
         :root {
-            --bg-light: #fbf1c7;
-            --bg-dark: #282828;
-            --red-light: #cc241d;
-            --red-dark: #fb4934;
-            --green-light: #98971a;
-            --green-dark: #b8bb26;
-            --yellow-light: #d79921;
-            --yellow-dark: #fabd2f;
-            --blue-light: #458588;
-            --blue-dark: #83a598;
-            --purple-light: #b16286;
-            --purple-dark: #d3869b;
-            --aqua-light: #689d6a;
-            --aqua-dark: #8ec07c;
-            --gray-light: #a89984;
-            --gray-dark: #928374;
-            --fg-light: #3c3836;
-            --fg-dark: #ebdbb2;
-            --bg-current: var(--bg-light);
-            --fg-current: var(--fg-light);
-            --accent-current: var(--yellow-light);
+            /* Colores Gruvbox claro */
+            --bg: #fbf1c7;
+            --bg-alt: #ebdbb2;
+            --fg: #3c3836;
+            --fg-alt: #504945;
+            --red: #cc241d;
+            --green: #98971a;
+            --yellow: #d79921;
+            --blue: #458588;
+            --purple: #b16286;
+            --aqua: #689d6a;
+            --orange: #d65d0e;
+        }
+
+        [data-theme="dark"] {
+            /* Colores Gruvbox oscuro */
+            --bg: #282828;
+            --bg-alt: #3c3836;
+            --fg: #ebdbb2;
+            --fg-alt: #d5c4a1;
+            --red: #fb4934;
+            --green: #b8bb26;
+            --yellow: #fabd2f;
+            --blue: #83a598;
+            --purple: #d3869b;
+            --aqua: #8ec07c;
+            --orange: #fe8019;
         }
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-current);
-            color: var(--fg-current);
+            background-color: var(--bg);
+            color: var(--fg);
             margin: 0;
             padding: 0;
             transition: background-color 0.3s, color 0.3s;
@@ -52,7 +58,7 @@
             height: 150px;
             border-radius: 50%;
             object-fit: cover;
-            border: 5px solid var(--accent-current);
+            border: 5px solid var(--yellow);
             margin-bottom: 5px;
             transition: border-color 0.3s;
         }
@@ -60,17 +66,17 @@
         h1 {
             font-size: 2.5rem;
             margin-bottom: 30px;
-            color: var(--fg-current);
+            color: var(--fg);
         }
 
         .portfolio-item {
-            background-color: var(--bg-current);
-            color: var(--fg-current);
+            background-color: var(--bg-alt);
+            color: var(--fg);
             padding: 15px;
             margin: 20px 0;
             border-radius: 8px;
             transition: all 0.3s;
-            border: 3px solid var(--accent-current);
+            border: 3px solid var(--yellow);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             position: relative;
@@ -106,64 +112,69 @@
         .portfolio-item:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-            background-color: rgba(214, 93, 14, 0.05);
+            background-color: rgba(214, 93, 14, 0.1);
         }
 
         .portfolio-item h2 {
             margin: 0 0 5px 0;
-            color: var(--accent-current);
+            color: var(--orange);
             font-size: 1.2rem;
         }
 
         .portfolio-item p {
             margin: 0;
-            color: var(--fg-current);
+            color: var(--fg-alt);
             font-size: 0.9rem;
         }
 
-        .portfolio-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 1;
-        }
-
+        /* Estilos mejorados para el botón de tema */
         .theme-toggle {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: none;
+            background: var(--bg-alt);
             border: none;
             cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--fg);
             transition: all 0.3s;
-            z-index: 10;
-            width: 30px;
-            height: 30px;
-            padding: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        .theme-toggle svg {
-            width: 100%;
-            height: 100%;
-            fill: var(--accent-current);
-            transition: all 0.3s;
-        }
-
-        .theme-toggle:hover svg {
+        .theme-toggle:hover {
+            background-color: var(--yellow);
+            color: var(--bg);
             transform: scale(1.1);
         }
 
-        body.dark-mode {
-            --bg-current: var(--bg-dark);
-            --fg-current: var(--fg-dark);
-            --accent-current: var(--yellow-dark);
+        .theme-toggle svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            stroke: currentColor;
         }
 
-        body.dark-mode .portfolio-item:hover {
-            background-color: rgba(250, 189, 47, 0.05);
+        .sun-icon {
+            display: none;
+        }
+
+        [data-theme="dark"] .sun-icon {
+            display: block;
+        }
+
+        [data-theme="dark"] .moon-icon {
+            display: none;
+        }
+
+        [data-theme="dark"] .portfolio-item:hover {
+            background-color: rgba(250, 189, 47, 0.1);
         }
     </style>
 </head>
@@ -172,7 +183,7 @@
         <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12,18c-3.3,0-6-2.7-6-6s2.7-6,6-6c0.1,0,0.2,0,0.3,0c-0.2,0.5-0.3,1-0.3,1.5c0,2.8,2.2,5,5,5c0.5,0,1-0.1,1.5-0.3 C12.2,17.8,12.1,18,12,18z"/>
         </svg>
-        <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <circle cx="12" cy="12" r="5"/>
             <line x1="12" y1="1" x2="12" y2="3"/>
             <line x1="12" y1="21" x2="12" y2="23"/>
@@ -189,65 +200,65 @@
         <img src="./assets/noestimes.png" alt="No Estimes" class="profile-img">
         <h1>No Estimes</h1>
 
-        
-            <div class="portfolio-item" onclick="window.open('https://noestimes.github.io/newspaper/', '_blank')">
-                <div class="portfolio-item-content">
-                    <div class="project-text">
-                        <h2>No Estimes - News</h2>
-                        <p>Pagina web de noticias que Instagram no me deja subir.</p>
-                    </div>
+        <div class="portfolio-item" onclick="window.open('https://noestimes.github.io/newspaper/', '_blank')">
+            <div class="portfolio-item-content">
+                <div class="project-text">
+                    <h2>No Estimes - News</h2>
+                    <p>Pagina web de noticias que Instagram no me deja subir.</p>
                 </div>
             </div>
+        </div>
+        
         <div class="portfolio-item" onclick="window.open('https://discord.gg/ZkvHK84Z', '_blank')">
             <div class="portfolio-item-content">
                 <div class="project-text">
                     <h2>Discord</h2>
-                    <p>Discord hecho en colaboración con @archivo.anarquista .</p>
+                    <p>Discord hecho en colaboración con @archivo.anarquista.</p>
                 </div>
             </div>
-            </div>
+        </div>
+        
         <div class="portfolio-item" onclick="window.location.href='mailto:noestimes@yahoo.com'">
             <div class="portfolio-item-content">
                 <div class="project-text">
                     <h2>Contacto</h2>
                     <p>Email directo por si quereis mandarme algo más serio.</p>
                 </div>
-                </div>
             </div>
-            <div class="portfolio-item" onclick="window.open('https://www.instagram.com/no.estimes/', '_blank')">
+        </div>
+        
+        <div class="portfolio-item" onclick="window.open('https://www.instagram.com/no.estimes/', '_blank')">
             <div class="portfolio-item-content">
                 <div class="project-text">
                     <h2>Instagram</h2>
                     <p>La cuenta de instagram oficial.</p>
-                
+                </div>
             </div>
         </div>
-        </div>
+    </div>
 
     <script>
         const themeToggle = document.getElementById('themeToggle');
-        const body = document.body;
-        const moonIcon = document.querySelector('.moon-icon');
-        const sunIcon = document.querySelector('.sun-icon');
+        const html = document.documentElement;
 
-        const currentTheme = localStorage.getItem('theme');
+        // Verificar preferencia del usuario
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = localStorage.getItem('theme') || (prefersDark ? 'dark' : 'light');
+
+        // Aplicar tema inicial
         if (currentTheme === 'dark') {
-            body.classList.add('dark-mode');
-            moonIcon.style.display = 'none';
-            sunIcon.style.display = 'block';
+            html.setAttribute('data-theme', 'dark');
         }
 
+        // Alternar tema
         themeToggle.addEventListener('click', () => {
-            body.classList.toggle('dark-mode');
-            
-            if (body.classList.contains('dark-mode')) {
-                localStorage.setItem('theme', 'dark');
-                moonIcon.style.display = 'none';
-                sunIcon.style.display = 'block';
-            } else {
+            const currentTheme = html.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                html.removeAttribute('data-theme');
                 localStorage.setItem('theme', 'light');
-                moonIcon.style.display = 'block';
-                sunIcon.style.display = 'none';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
             }
         });
     </script>
